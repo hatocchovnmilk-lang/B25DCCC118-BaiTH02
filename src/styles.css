@@ -1,0 +1,95 @@
+:root {
+  --bg: #eef3f7;
+  --panel: #ffffff;
+  --ink: #14212b;
+  --muted: #5d6f7c;
+  --line: #d5dfe6;
+  --accent: #0b6e8a;
+  --accent-ink: #ffffff;
+  --hot: #c2410c;
+  --cool: #0b6e8a;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Be Vietnam Pro", system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+button { font: inherit; cursor: pointer; }
+button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+.app { max-width: 960px; margin: 0 auto; padding: 24px 16px 48px; }
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.topbar h1 { margin: 0; font-size: 1.6rem; font-weight: 800; }
+
+.unit-toggle { display: flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--panel); }
+.unit-toggle button { border: 0; background: transparent; padding: 8px 16px; font-weight: 500; color: var(--muted); }
+.unit-toggle button.active { background: var(--accent); color: var(--accent-ink); }
+
+/* 2 cột: danh sách thành phố | chi tiết */
+.layout { display: grid; grid-template-columns: 220px 1fr; gap: 20px; align-items: start; }
+
+.city-list { display: flex; flex-direction: column; gap: 6px; }
+.city {
+  text-align: left;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  color: var(--ink);
+}
+.city:hover { border-color: var(--accent); }
+.city.selected { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 700; }
+
+.detail { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 24px; min-height: 360px; }
+
+.state { color: var(--muted); }
+.state.error p { margin: 0 0 8px; }
+.state.error > p:first-child { color: #b42318; font-weight: 700; }
+.retry { margin-top: 8px; padding: 8px 18px; border: 0; border-radius: 8px; background: var(--accent); color: var(--accent-ink); font-weight: 700; }
+
+.current h2 { margin: 0; font-size: 1.3rem; }
+.now { display: flex; align-items: center; gap: 12px; }
+.big-icon { font-size: 3.5rem; line-height: 1; }
+.temp { font-size: 4rem; font-weight: 800; letter-spacing: -0.03em; }
+.label { margin: 0 0 16px; font-weight: 500; }
+.muted { color: var(--muted); font-size: 0.9rem; margin: 0; }
+
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 0 0 16px; }
+.stats div { border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; }
+.stats dt { color: var(--muted); font-size: 0.85rem; }
+.stats dd { margin: 0; font-size: 1.2rem; font-weight: 700; }
+
+.forecast { margin-top: 24px; border-top: 1px solid var(--line); padding-top: 16px; }
+.forecast h3 { margin: 0 0 8px; font-size: 1.05rem; }
+.forecast ul { list-style: none; margin: 0; padding: 0; }
+.forecast li {
+  display: grid;
+  grid-template-columns: 1fr 40px 64px 64px;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line);
+}
+.forecast li:last-child { border-bottom: 0; }
+.forecast .icon { font-size: 1.4rem; text-align: center; }
+.forecast .hi { text-align: right; font-weight: 700; color: var(--hot); }
+.forecast .lo { text-align: right; color: var(--cool); }
+
+/* Responsive: từ 768px trở xuống xếp dọc */
+@media (max-width: 768px) {
+  .layout { grid-template-columns: 1fr; }
+  .city-list { flex-direction: row; flex-wrap: wrap; }
+  .temp { font-size: 3rem; }
+  .stats { grid-template-columns: 1fr; }
+}
